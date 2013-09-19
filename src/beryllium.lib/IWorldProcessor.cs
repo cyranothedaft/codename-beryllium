@@ -9,6 +9,8 @@ using beryllium.lib.Model;
 
 namespace beryllium.lib {
    public interface IWorldProcessor {
+      void ProcessLevelDirectory(LevelDirectoryMetadata levelDirectoryMetadata);
+
       void ProcessLevelMetadata(LevelMetadata levelMetadata);
 
       void ProcessDimensionMetadata(DimensionMetadata dimension);

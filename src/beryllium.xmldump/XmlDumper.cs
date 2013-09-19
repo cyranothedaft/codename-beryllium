@@ -15,6 +15,11 @@ namespace beryllium.xmldump
 {
    public class XmlDumper : IWorldProcessor {
       private static readonly XName AttribName_name = XName.Get("name");
+
+      private static readonly XName NodeName_directoryInfo = XName.Get("directoryInfo");
+      private static readonly XName NodeName_directory = XName.Get("directory");
+      private static readonly XName NodeName_file = XName.Get("file");
+      private static readonly XName NodeName_fullPath = XName.Get("fullPath");
       private static readonly XName NodeName_level = XName.Get("level");
       private static readonly XName NodeName_version = XName.Get("version");
       private static readonly XName NodeName_isInitialized = XName.Get("isInitialized");
@@ -53,6 +58,31 @@ namespace beryllium.xmldump
 
       public string GetXml() {
          return _xdoc.ToString();
+      }
+
+
+      public void ProcessLevelDirectory(LevelDirectoryMetadata levelDirectoryMetadata) {
+         XElement dirInfoElem = new XElement(NodeName_directoryInfo);
+         dirInfoElem.Add(new XElement(NodeName_fullPath, levelDirectoryMetadata.LevelDirectoryPath));
+
+         XElement rootDirElem = getNodeElem(levelDirectoryMetadata.FileSystemDirectory, null);
+         dirInfoElem.Add(rootDirElem);
+
+         _xdoc.Root.Add(dirInfoElem);
+      }
+
+
+      private XElement getNodeElem(LevelDirectoryNode node, string name) {
+         XElement nodeElem = new XElement(node.IsDirectory ? NodeName_directory : NodeName_file);
+         if ( name != null )
+            nodeElem.Add(new XAttribute(AttribName_name, name));
+
+         foreach ( LevelDirectoryNode child in node.Children ) {
+            XElement childElem = getNodeElem(child, child.Name);
+            nodeElem.Add(childElem);
+         }
+
+         return nodeElem;
       }
 
 

@@ -12,8 +12,8 @@ using beryllium.lib.Nbt;
 
 
 namespace beryllium.lib.Readers {
-   internal sealed class LevelReader {
-      public const string LevelFileName = "level.dat";
+   internal sealed class LevelDatReader {
+      public const string LevelDatFileName = "level.dat";
 
       internal const string TagName_Data = "Data";
       internal const string TagName_Version = "version";
@@ -41,19 +41,11 @@ namespace beryllium.lib.Readers {
       /// <summary>
       /// 
       /// </summary>
-      /// <param name="levelFilePath">Refers either to a level.dat file or a world level directory that contains a level.dat file.</param>
-      public static LevelMetadata ReadMetadata(string levelFilePath) {
-         // TODO ? read session.lock file and issue suitable warning
-
-         if ( !string.Equals(Path.GetFileName(levelFilePath), LevelFileName, StringComparison.OrdinalIgnoreCase) )
-            levelFilePath = Path.Combine(levelFilePath, LevelFileName);
-
-         if ( !File.Exists(levelFilePath) )
-            throw new FileNotFoundException(string.Concat(LevelFileName, " not found at specified path: ", levelFilePath), levelFilePath);
-
+      /// <param name="levelDatFilePath">Full path to a level.dat file.</param>
+      public static LevelMetadata ReadMetadata(string levelDatFilePath) {
          LevelMetadata levelMetadata;
 
-         using ( FileStream fileStream = new FileStream(levelFilePath, FileMode.Open, FileAccess.Read) )
+         using ( FileStream fileStream = new FileStream(levelDatFilePath, FileMode.Open, FileAccess.Read) )
          using ( GZipStream gzipStream = new GZipStream(fileStream, CompressionMode.Decompress, false) )
          using ( BinaryReader binReader = new BinaryReader(gzipStream) ) {
             NbtReader rdr = new NbtReader(binReader);

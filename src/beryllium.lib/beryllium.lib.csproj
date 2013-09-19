@@ -46,6 +46,8 @@
     <Compile Include="Model\ChunkPointer.cs" />
     <Compile Include="Model\DimensionMetadata.cs" />
     <Compile Include="Model\DimensionPointer.cs" />
+    <Compile Include="Model\LevelDirectoryMetadata.cs" />
+    <Compile Include="Model\LevelDirectoryNode.cs" />
     <Compile Include="Model\LevelMetadata.cs" />
     <Compile Include="Model\Region.cs" />
     <Compile Include="Model\RegionHeader.cs" />
@@ -56,13 +58,14 @@
     <Compile Include="Nbt\NbtTagPayload.cs" />
     <Compile Include="Nbt\NbtTagPayload_Compound.cs" />
     <Compile Include="Nbt\NbtTagPayload_List.cs" />
+    <Compile Include="Readers\LevelDirectoryScanner.cs" />
     <Compile Include="Readers\RegionReader.cs" />
     <Compile Include="WorldReader.cs" />
     <Compile Include="IWorldProcessor.cs" />
     <Compile Include="MasterProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Readers\DimensionScanner.cs" />
-    <Compile Include="Readers\LevelReader.cs" />
+    <Compile Include="Readers\LevelDatReader.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

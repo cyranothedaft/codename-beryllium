@@ -17,6 +17,10 @@ namespace beryllium.lib {
       }
 
 
+      public void ProcessLevelDirectory(LevelDirectoryMetadata levelDirectoryMetadata) {
+         foreach ( IWorldProcessor processor in _processors ) processor.ProcessLevelDirectory(levelDirectoryMetadata);
+      }
+
       public void ProcessLevelMetadata(LevelMetadata levelMetadata) {
          foreach ( IWorldProcessor processor in _processors ) processor.ProcessLevelMetadata(levelMetadata);
       }

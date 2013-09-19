@@ -22,13 +22,19 @@ namespace beryllium.lib {
       /// </summary>
       /// <param name="levelFilePath">Refers either to a level.dat file or a world level directory that contains a level.dat file.</param>
       public void Process(string levelFilePath) {
-         LevelMetadata levelMetadata = LevelReader.ReadMetadata(levelFilePath);
+         LevelDirectoryScanner levelDirectoryScanner = new LevelDirectoryScanner(levelFilePath);
+
+         LevelDirectoryMetadata levelDirectoryMetadata = levelDirectoryScanner.Scan();
+         _masterProc.ProcessLevelDirectory(levelDirectoryMetadata);
+
+         LevelMetadata levelMetadata = LevelDatReader.ReadMetadata(levelDirectoryMetadata.LevelDatFilePath);
          _masterProc.ProcessLevelMetadata(levelMetadata);
 
-//         foreach ( DimensionPointer dimensionPointer in levelMetadata.DimensionPointers ) {
-//            DimensionMetadata dimension = DimensionScanner.ReadMetadata(dimensionPointer);
-//            _masterProc.ProcessDimensionMetadata(dimension);
-//
+         foreach ( DimensionPointer dimensionPointer in levelDirectoryMetadata.DimensionPointers ) {
+//===
+            DimensionMetadata dimension = DimensionScanner.ReadMetadata(dimensionPointer);
+            _masterProc.ProcessDimensionMetadata(dimension);
+
 //            foreach ( RegionPointer regionPointer in dimension.RegionPointers ) {
 //               RegionReader regionReader = new RegionReader(regionPointer);
 //               Region region = regionReader.ReadHeaderOnly();
@@ -47,7 +53,7 @@ namespace beryllium.lib {
 //            }
 //
 //            _masterProc.ProcessDimensionEnd(dimension);
-//         }
+         }
 
          _masterProc.ProcessLevelEnd(levelMetadata);
       }
