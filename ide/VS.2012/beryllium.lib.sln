@@ -5,6 +5,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "beryllium.lib", "..\..\src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "beryllium.stats", "..\..\src\beryllium.stats\beryllium.stats.csproj", "{C15620FB-0494-4306-A0F3-D827FE34587F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "beryllium.xmldump", "..\..\src\beryllium.xmldump\beryllium.xmldump.csproj", "{483AE91C-7DD5-4566-94EA-370D2984C820}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test.beryllium.xmldump", "..\..\src\test.beryllium.xmldump\test.beryllium.xmldump.csproj", "{486398AB-1EB2-4883-A0E4-1D948A6C26AB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "(Tests)", "(Tests)", "{5FFF5549-1483-4532-B213-A3239136A99B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,8 +25,19 @@ Global
 		{C15620FB-0494-4306-A0F3-D827FE34587F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C15620FB-0494-4306-A0F3-D827FE34587F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C15620FB-0494-4306-A0F3-D827FE34587F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{483AE91C-7DD5-4566-94EA-370D2984C820}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{483AE91C-7DD5-4566-94EA-370D2984C820}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{483AE91C-7DD5-4566-94EA-370D2984C820}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{483AE91C-7DD5-4566-94EA-370D2984C820}.Release|Any CPU.Build.0 = Release|Any CPU
+		{486398AB-1EB2-4883-A0E4-1D948A6C26AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{486398AB-1EB2-4883-A0E4-1D948A6C26AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{486398AB-1EB2-4883-A0E4-1D948A6C26AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{486398AB-1EB2-4883-A0E4-1D948A6C26AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{486398AB-1EB2-4883-A0E4-1D948A6C26AB} = {5FFF5549-1483-4532-B213-A3239136A99B}
 	EndGlobalSection
 EndGlobal

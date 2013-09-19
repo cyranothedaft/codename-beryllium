@@ -3,23 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using beryllium.lib.Model;
+
+
 
 namespace beryllium.lib {
    public interface IWorldProcessor {
-      void ProcessLevelMetadata();
+      void ProcessLevelMetadata(LevelMetadata levelMetadata);
 
-      void ProcessDimensionMetadata();
+      void ProcessDimensionMetadata(DimensionMetadata dimension);
 
-      void ProcessRegionHeader();
+      void ProcessRegionHeader(RegionHeader regionHeader);
 
-      void ProcessChunkHeader();
+      void ProcessChunkHeader(ChunkHeader chunkHeader);
 
-      void ProcessChunkData();
+      void ProcessChunkData(Chunk chunk);
 
-      void ProcessRegionEnd();
+      void ProcessRegionEnd(Region region);
 
-      void ProcessDimensionEnd();
+      void ProcessDimensionEnd(DimensionMetadata dimension);
 
-      void ProcessLevelEnd();
+      void ProcessLevelEnd(LevelMetadata levelMetadata);
    }
 }
