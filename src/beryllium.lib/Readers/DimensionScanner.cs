@@ -4,9 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-
-namespace beryllium.lib {
-   public sealed class DimensionProcessor {
+namespace beryllium.lib.Readers {
+   internal static class DimensionScanner {
    }
 }

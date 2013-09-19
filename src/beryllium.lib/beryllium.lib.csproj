@@ -39,9 +39,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DimensionProcessor.cs" />
-    <Compile Include="IProcessor.cs" />
+    <Compile Include="WorldReader.cs" />
+    <Compile Include="IWorldProcessor.cs" />
+    <Compile Include="MasterProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Readers\DimensionScanner.cs" />
+    <Compile Include="Readers\LevelReader.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

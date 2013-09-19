@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace beryllium.lib {
-   public interface IProcessor {
+namespace beryllium.lib.Readers {
+   internal sealed class LevelReader {
    }
 }

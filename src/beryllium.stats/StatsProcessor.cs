@@ -8,6 +8,6 @@ using beryllium.lib;
 
 
 namespace beryllium.stats {
-   public class StatsProcessor : IProcessor {
+   public class StatsProcessor : IWorldProcessor {
    }
 }
