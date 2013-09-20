@@ -13,8 +13,6 @@ using beryllium.lib.Nbt;
 
 namespace beryllium.lib.Readers {
    internal sealed class LevelDatReader {
-      public const string LevelDatFileName = "level.dat";
-
       internal const string TagName_Data = "Data";
       internal const string TagName_Version = "version";
       internal const string TagName_Initialized = "initialized";

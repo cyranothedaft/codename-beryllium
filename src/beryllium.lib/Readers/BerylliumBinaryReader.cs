@@ -5,11 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace beryllium.lib.Nbt {
-   internal abstract class NbtBinaryReader {
+namespace beryllium.lib.Readers {
+   internal abstract class BerylliumBinaryReader {
+      internal enum RegionCompressionType : int {
+         GZip = 1, // RFC1952, unused in practice
+         Zlib = 2, // RFC1950
+      }
+
+
       protected readonly BinaryReader _binReader;
 
-      protected NbtBinaryReader(BinaryReader binReader) {
+      protected BerylliumBinaryReader(BinaryReader binReader) {
          _binReader = binReader;
       }
 

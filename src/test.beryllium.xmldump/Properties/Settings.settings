@@ -1,0 +1,9 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="test.beryllium.xmldump.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="TestDataPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">D:\files\priv\personal\eat\proj\dev\_github\codename-beryllium\data</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

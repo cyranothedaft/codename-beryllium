@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Exceptions\BerylliumException.cs" />
     <Compile Include="Exceptions\DataStructureException.cs" />
+    <Compile Include="FileSystemNames.cs" />
     <Compile Include="Model\Chunk.cs" />
     <Compile Include="Model\ChunkHeader.cs" />
     <Compile Include="Model\ChunkPointer.cs" />
@@ -52,13 +53,14 @@
     <Compile Include="Model\Region.cs" />
     <Compile Include="Model\RegionHeader.cs" />
     <Compile Include="Model\RegionPointer.cs" />
-    <Compile Include="Nbt\NbtBinaryReader.cs" />
+    <Compile Include="Readers\BerylliumBinaryReader.cs" />
     <Compile Include="Nbt\NbtReader.cs" />
     <Compile Include="Nbt\NbtTag.cs" />
     <Compile Include="Nbt\NbtTagPayload.cs" />
     <Compile Include="Nbt\NbtTagPayload_Compound.cs" />
     <Compile Include="Nbt\NbtTagPayload_List.cs" />
     <Compile Include="Readers\LevelDirectoryScanner.cs" />
+    <Compile Include="Readers\RegionFileReader.cs" />
     <Compile Include="Readers\RegionReader.cs" />
     <Compile Include="WorldReader.cs" />
     <Compile Include="IWorldProcessor.cs" />

@@ -4,6 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using beryllium.lib.Readers;
+
+
 
 namespace beryllium.lib.Nbt {
    internal enum TagId : int {
@@ -22,7 +25,7 @@ namespace beryllium.lib.Nbt {
    }
 
 
-   internal sealed class NbtReader : NbtBinaryReader {
+   internal sealed class NbtReader : BerylliumBinaryReader {
       public NbtReader(BinaryReader binReader) : base(binReader) { }
 
 

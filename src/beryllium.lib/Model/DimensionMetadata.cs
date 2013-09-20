@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace beryllium.lib.Model {
    public class DimensionMetadata {
-      public IEnumerable<RegionPointer> RegionPointers {
-         get {
-            // TODO
-            yield break;
-         }
+      public DimensionPointer DimensionPointer { get; private set; }
+      public RegionPointer[] RegionPointers { get; internal set; }
+
+      public DimensionMetadata(DimensionPointer dimensionPointer) {
+         DimensionPointer = dimensionPointer;
       }
    }
 }

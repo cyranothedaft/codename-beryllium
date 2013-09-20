@@ -23,11 +23,11 @@ namespace beryllium.lib.Readers {
       public LevelDirectoryScanner(string levelFilePath) {
          // TODO ? read session.lock file and issue suitable warning
 
-         if ( !string.Equals(Path.GetFileName(levelFilePath), LevelDatReader.LevelDatFileName, StringComparison.OrdinalIgnoreCase) )
-            levelFilePath = Path.Combine(levelFilePath, LevelDatReader.LevelDatFileName);
+         if ( !string.Equals(Path.GetFileName(levelFilePath), FileSystemNames.FileName_LevelDat, StringComparison.OrdinalIgnoreCase) )
+            levelFilePath = Path.Combine(levelFilePath, FileSystemNames.FileName_LevelDat);
 
          if ( !File.Exists(levelFilePath) )
-            throw new FileNotFoundException(string.Concat(LevelDatReader.LevelDatFileName, " not found at specified path: ", levelFilePath), levelFilePath);
+            throw new FileNotFoundException(string.Concat(FileSystemNames.FileName_LevelDat, " not found at specified path: ", levelFilePath), levelFilePath);
 
          _levelDatFilePath = levelFilePath;
          _levelDirectoryPath = Path.GetDirectoryName(levelFilePath);
@@ -45,7 +45,7 @@ namespace beryllium.lib.Readers {
          levelDirectoryMetadata.FileSystemDirectory = getDirNode(new DirectoryInfo(_levelDirectoryPath));
 
          // get list of dimensions by scanning in-memory copy of directory structure
-         levelDirectoryMetadata.Dimensions = findDimensions(levelDirectoryMetadata.FileSystemDirectory).ToArray();
+         levelDirectoryMetadata.DimensionPointers = findDimensions(levelDirectoryMetadata.FileSystemDirectory).ToArray();
 
          return levelDirectoryMetadata;
       }
@@ -72,15 +72,17 @@ namespace beryllium.lib.Readers {
 
 
       private IEnumerable<DimensionPointer> findDimensions(LevelDirectoryNode fileSystemDirectory) {
-         yield return findDimension(fileSystemDirectory, "region", "Overworld");
-         yield return findDimension(fileSystemDirectory, "DIM-1", "The Nether");
-         yield return findDimension(fileSystemDirectory, "DIM1", "The End");
+         yield return findDimension(fileSystemDirectory, null, "Overworld");
+         yield return findDimension(fileSystemDirectory, FileSystemNames.DirName_Dim_Nether, "The Nether");
+         yield return findDimension(fileSystemDirectory, FileSystemNames.DirName_Dim_End, "The End");
          // TODO: support more dimensions, such as Twilight Portal and Mystcraft ages
       }
 
 
       private DimensionPointer findDimension(LevelDirectoryNode rootDirNode, string dimDirName, string dimName) {
-         LevelDirectoryNode dimDirNode = rootDirNode.Children.FirstOrDefault(d => d.Name == dimDirName);
+         LevelDirectoryNode dimDirNode = ( dimDirName == null )
+                                            ? rootDirNode
+                                            : rootDirNode.Children.FirstOrDefault(d => d.Name == dimDirName);
          DimensionPointer dimPointer = new DimensionPointer(dimDirNode, dimName);
          return dimPointer;
       }
