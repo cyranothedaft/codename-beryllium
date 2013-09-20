@@ -1,115 +1,120 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<world>
-   <directoryInfo>
-      <fullPath>C:\files\personal\proj\dev\codename-beryllium\data\SampleWorlds\flat test 1</fullPath>
-      <directory>
-         <directory name="chickenchunks">
-            <file name="loginTimes.dat"/>
-         </directory>
-         <directory name="data">
-            <directory name="redlogic-compiled-circuit-cache.dat">
-               <file name="session-counter"/>
-            </directory>
-            <file name="villages.dat"/>
-         </directory>
-         <directory name="DIM-1">
-            <directory name="data">
-               <file name="forcedchunks.dat"/>
-               <file name="multipart.dat"/>
-               <directory name="RedstoneEther">
-                  <file name="fmap.dat"/>
-                  <file name="node1.dat"/>
-                  <file name="node2.dat"/>
-               </directory>
-            </directory>
-         </directory>
-         <directory name="DIM1">
-            <directory name="data">
-               <file name="forcedchunks.dat"/>
-               <file name="multipart.dat"/>
-               <directory name="RedstoneEther">
-                  <file name="fmap.dat"/>
-                  <file name="node1.dat"/>
-                  <file name="node2.dat"/>
-               </directory>
-            </directory>
-         </directory>
-         <directory name="DIM50">
-            <directory name="data">
-               <file name="forcedchunks.dat"/>
-               <file name="multipart.dat"/>
-               <directory name="RedstoneEther">
-                  <file name="fmap.dat"/>
-                  <file name="node1.dat"/>
-                  <file name="node2.dat"/>
-               </directory>
-            </directory>
-         </directory>
-         <directory name="EnderStorage"/>
-         <file name="forcedchunks.dat"/>
-         <file name="hats.dat"/>
-         <file name="ic2_map.cfg"/>
-         <file name="level.dat"/>
-         <file name="level.dat_mcr"/>
-         <file name="level.dat_old"/>
-         <file name="morph.dat"/>
-         <file name="morph_backup.dat"/>
-         <file name="multipart.dat"/>
-         <directory name="NEI">
-            <directory name="players">
-               <file name="cyranothedaft.dat"/>
-            </directory>
-         </directory>
-         <file name="NEI.dat"/>
-         <directory name="players">
-            <file name="cyranothedaft.dat"/>
-         </directory>
-         <file name="portalgun.dat"/>
-         <file name="PortalGun_world.cfg"/>
-         <directory name="RedstoneEther">
-            <file name="dimMap.dat"/>
-            <file name="fmap.dat"/>
-            <file name="fprop.dat"/>
-            <file name="gprop.dat"/>
-            <file name="node1.dat"/>
-            <file name="node2.dat"/>
-         </directory>
-         <directory name="region">
-            <file name="r.-1.-1.mca"/>
-            <file name="r.-1.-2.mca"/>
-            <file name="r.-1.0.mca"/>
-            <file name="r.-2.-1.mca"/>
-            <file name="r.-2.-2.mca"/>
-            <file name="r.-2.0.mca"/>
-            <file name="r.0.0.mca"/>
-         </directory>
-         <file name="session.lock"/>
+﻿<world>
+  <directoryInfo>
+    <fullPath>C:\files\personal\proj\dev\codename-beryllium\data\SampleWorlds\flat test 1</fullPath>
+    <directory>
+      <directory name="chickenchunks">
+        <file name="loginTimes.dat" />
       </directory>
-   </directoryInfo>
-   <level name="flat test 1">
-      <version>19133</version>
-      <isInitialized>1</isInitialized>
-      <generatorName>flat</generatorName>
-      <generatorVersion>0</generatorVersion>
-      <generatorOptions></generatorOptions>
-      <randomSeed>-8801695316299714583</randomSeed>
-      <mapFeatures>0</mapFeatures>
-      <lastPlayed>1379615069609</lastPlayed>
-      <allowCommands>1</allowCommands>
-      <isHardCore>0</isHardCore>
-      <gameType>1</gameType>
-      <time>18</time>
-      <dayTime>18</dayTime>
-      <spawnX>-649</spawnX>
-      <spawnY>4</spawnY>
-      <spawnZ>-127</spawnZ>
-      <isRaining>0</isRaining>
-      <rainTime>113387</rainTime>
-      <isThundering>0</isThundering>
-      <thunderTime>120838</thunderTime>
-      <dimensions>
-         <dimension name="Overworld"></dimension>
-         <dimension name="Nether"></dimension>
-      </dimensions>
-   </level>
+      <directory name="data">
+        <directory name="redlogic-compiled-circuit-cache.dat">
+          <file name="session-counter" />
+        </directory>
+        <file name="villages.dat" />
+      </directory>
+      <directory name="DIM-1">
+        <directory name="data" />
+        <file name="forcedchunks.dat" />
+        <file name="multipart.dat" />
+        <directory name="RedstoneEther">
+          <file name="fmap.dat" />
+          <file name="node1.dat" />
+          <file name="node2.dat" />
+        </directory>
+      </directory>
+      <directory name="DIM1">
+        <directory name="data" />
+        <file name="forcedchunks.dat" />
+        <file name="multipart.dat" />
+        <directory name="RedstoneEther">
+          <file name="fmap.dat" />
+          <file name="node1.dat" />
+          <file name="node2.dat" />
+        </directory>
+      </directory>
+      <directory name="DIM50">
+        <directory name="data" />
+        <file name="forcedchunks.dat" />
+        <file name="multipart.dat" />
+        <directory name="RedstoneEther">
+          <file name="fmap.dat" />
+          <file name="node1.dat" />
+          <file name="node2.dat" />
+        </directory>
+      </directory>
+      <directory name="EnderStorage" />
+      <file name="forcedchunks.dat" />
+      <file name="hats.dat" />
+      <file name="ic2_map.cfg" />
+      <file name="level.dat" />
+      <file name="level.dat_mcr" />
+      <file name="level.dat_old" />
+      <file name="morph.dat" />
+      <file name="morph_backup.dat" />
+      <file name="multipart.dat" />
+      <directory name="NEI">
+        <directory name="players">
+          <file name="cyranothedaft.dat" />
+        </directory>
+      </directory>
+      <file name="NEI.dat" />
+      <directory name="players">
+        <file name="cyranothedaft.dat" />
+      </directory>
+      <file name="portalgun.dat" />
+      <file name="PortalGun_world.cfg" />
+      <directory name="RedstoneEther">
+        <file name="dimMap.dat" />
+        <file name="fmap.dat" />
+        <file name="fprop.dat" />
+        <file name="gprop.dat" />
+        <file name="node1.dat" />
+        <file name="node2.dat" />
+      </directory>
+      <directory name="region">
+        <file name="r.-1.-1.mca" />
+        <file name="r.-1.-2.mca" />
+        <file name="r.-1.0.mca" />
+        <file name="r.-2.-1.mca" />
+        <file name="r.-2.-2.mca" />
+        <file name="r.-2.0.mca" />
+        <file name="r.0.0.mca" />
+      </directory>
+      <file name="session.lock" />
+    </directory>
+  </directoryInfo>
+  <level name="flat test 1">
+    <version>19133</version>
+    <isInitialized>1</isInitialized>
+    <generatorName>flat</generatorName>
+    <generatorVersion>0</generatorVersion>
+    <generatorOptions></generatorOptions>
+    <randomSeed>-8801695316299714583</randomSeed>
+    <mapFeatures>0</mapFeatures>
+    <lastPlayed>1379615069609</lastPlayed>
+    <allowCommands>1</allowCommands>
+    <isHardCore>0</isHardCore>
+    <gameType>1</gameType>
+    <time>18</time>
+    <dayTime>18</dayTime>
+    <spawnX>-649</spawnX>
+    <spawnY>4</spawnY>
+    <spawnZ>-127</spawnZ>
+    <isRaining>0</isRaining>
+    <rainTime>113387</rainTime>
+    <isThundering>0</isThundering>
+    <thunderTime>120838</thunderTime>
+    <dimensions>
+      <dimension name="Overworld" hasRegions="true">
+        <region name="r.-1.-1.mca" x="-1" z="-1" />
+        <region name="r.-1.-2.mca" x="-1" z="-2" />
+        <region name="r.-1.0.mca" x="-1" z="0" />
+        <region name="r.-2.-1.mca" x="-2" z="-1" />
+        <region name="r.-2.-2.mca" x="-2" z="-2" />
+        <region name="r.-2.0.mca" x="-2" z="0" />
+        <region name="r.0.0.mca" x="0" z="0" />
+      </dimension>
+      <dimension name="The Nether" dirName="DIM-1" hasRegions="false" />
+      <dimension name="The End" dirName="DIM1" hasRegions="false" />
+    </dimensions>
+  </level>
 </world>

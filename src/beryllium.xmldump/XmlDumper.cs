@@ -17,6 +17,8 @@ namespace beryllium.xmldump
       private static readonly XName AttribName_name = XName.Get("name");
       private static readonly XName AttribName_dirName = XName.Get("dirName");
       private static readonly XName AttribName_hasRegions = XName.Get("hasRegions");
+      private static readonly XName AttribName_x = XName.Get("x");
+      private static readonly XName AttribName_z = XName.Get("z");
 
       private static readonly XName NodeName_directoryInfo = XName.Get("directoryInfo");
       private static readonly XName NodeName_directory = XName.Get("directory");
@@ -24,6 +26,7 @@ namespace beryllium.xmldump
       private static readonly XName NodeName_fullPath = XName.Get("fullPath");
       private static readonly XName NodeName_level = XName.Get("level");
       private static readonly XName NodeName_dimension = XName.Get("dimension");
+      private static readonly XName NodeName_dimensions = XName.Get("dimensions");
       private static readonly XName NodeName_region = XName.Get("region");
       private static readonly XName NodeName_version = XName.Get("version");
       private static readonly XName NodeName_isInitialized = XName.Get("isInitialized");
@@ -45,8 +48,6 @@ namespace beryllium.xmldump
       private static readonly XName NodeName_rainTime = XName.Get("rainTime");
       private static readonly XName NodeName_isThundering = XName.Get("isThundering");
       private static readonly XName NodeName_thunderTime = XName.Get("thunderTime");
-      private static readonly XName NodeName_regionX = XName.Get("regionX");
-      private static readonly XName NodeName_regionZ = XName.Get("regionZ");
 
 
       // TODO: use XmlWriter or something similar for forward-only writing so entire XML structure isn't maintained in memory
@@ -55,6 +56,7 @@ namespace beryllium.xmldump
       private readonly XDocument _xdoc;
 
       private XElement _levelElem,
+                       _dimsElem,
                        _dimElem;
 
 
@@ -118,6 +120,9 @@ namespace beryllium.xmldump
          _levelElem.Add(new XElement(NodeName_isThundering, levelMetadata.IsThundering));
          _levelElem.Add(new XElement(NodeName_thunderTime, levelMetadata.ThunderTime));
 
+         _dimsElem = new XElement(NodeName_dimensions);
+         _levelElem.Add(_dimsElem);
+
          _xdoc.Root.Add(_levelElem);
       }
 
@@ -125,18 +130,19 @@ namespace beryllium.xmldump
       public void ProcessDimensionMetadata(DimensionMetadata dimension) {
          _dimElem = new XElement(NodeName_dimension);
          _dimElem.Add(new XAttribute(AttribName_name, dimension.DimensionPointer.DimensionName));
-         _dimElem.Add(new XAttribute(AttribName_dirName, dimension.DimensionPointer.DimensionDirectoryNode.Name));
+         // TODO: add enum for supported dimension types
+         if ( dimension.DimensionPointer.DimensionName != "Overworld" )
+            _dimElem.Add(new XAttribute(AttribName_dirName, dimension.DimensionPointer.DimensionDirectoryNode.Name));
          _dimElem.Add(new XAttribute(AttribName_hasRegions, dimension.HasRegions));
-         _levelElem.Add(_dimElem);
+         _dimsElem.Add(_dimElem);
       }
 
 
       public void ProcessRegionHeader(Region region) {
          XElement regionElem = new XElement(NodeName_region);
          regionElem.Add(new XAttribute(AttribName_name, region.RegionPointer.FileName));
-
-         regionElem.Add(new XElement(NodeName_regionX, region.RegionPointer.RegionX));
-         regionElem.Add(new XElement(NodeName_regionZ, region.RegionPointer.RegionZ));
+         regionElem.Add(new XAttribute(AttribName_x, region.RegionPointer.RegionX));
+         regionElem.Add(new XAttribute(AttribName_z, region.RegionPointer.RegionZ));
          _dimElem.Add(regionElem);
       }
 
@@ -157,12 +163,13 @@ namespace beryllium.xmldump
 
 
       public void ProcessDimensionEnd(DimensionMetadata dimension) {
-         // TODO
+         _dimElem = null;
       }
 
 
       public void ProcessLevelEnd(LevelMetadata levelMetadata) {
-         // TODO
+         _dimsElem = null;
+         _levelElem = null;
       }
    }
 }
