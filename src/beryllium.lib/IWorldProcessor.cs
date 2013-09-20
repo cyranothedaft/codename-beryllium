@@ -15,7 +15,7 @@ namespace beryllium.lib {
 
       void ProcessDimensionMetadata(DimensionMetadata dimension);
 
-      void ProcessRegionHeader(RegionHeader regionHeader);
+      void ProcessRegionHeader(Region region);
 
       void ProcessChunkHeader(ChunkHeader chunkHeader);
 

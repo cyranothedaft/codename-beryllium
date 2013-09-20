@@ -29,8 +29,8 @@ namespace beryllium.lib {
          foreach ( IWorldProcessor processor in _processors ) processor.ProcessDimensionMetadata(dimension);
       }
 
-      public void ProcessRegionHeader(RegionHeader regionHeader) {
-         foreach ( IWorldProcessor processor in _processors ) processor.ProcessRegionHeader(regionHeader);
+      public void ProcessRegionHeader(Region region) {
+         foreach ( IWorldProcessor processor in _processors ) processor.ProcessRegionHeader(region);
       }
 
       public void ProcessChunkHeader(ChunkHeader chunkHeader) {

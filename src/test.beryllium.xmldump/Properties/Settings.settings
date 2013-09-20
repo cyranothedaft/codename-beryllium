@@ -5,5 +5,8 @@
     <Setting Name="TestDataPath" Type="System.String" Scope="User">
       <Value Profile="(Default)">D:\files\priv\personal\eat\proj\dev\_github\codename-beryllium\data</Value>
     </Setting>
+    <Setting Name="TestDataPath_xeat" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\files\personal\proj\dev\codename-beryllium\data</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

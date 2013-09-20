@@ -11,12 +11,13 @@ using beryllium.lib.Model;
 namespace beryllium.lib.Readers {
    internal static class DimensionScanner {
       public static DimensionMetadata ReadMetadata(DimensionPointer dimensionPointer) {
+         DimensionMetadata dimensionMetadata = new DimensionMetadata(dimensionPointer);
+
          var regionFiles = findRegionFiles(dimensionPointer);
-         var regionPointers = regionFiles.Select(f => new RegionPointer(f));
-         DimensionMetadata dimensionMetadata = new DimensionMetadata(dimensionPointer)
-                                                  {
-                                                     RegionPointers = regionPointers.ToArray()
-                                                  };
+         if ( regionFiles != null ) {
+            var regionPointers = regionFiles.Select(f => new RegionPointer(f));
+            dimensionMetadata.RegionPointers = regionPointers.ToArray();
+         }
          return dimensionMetadata;
       }
 
@@ -24,7 +25,11 @@ namespace beryllium.lib.Readers {
       private static IEnumerable<FileInfo> findRegionFiles(DimensionPointer dimensionPointer) {
          string dimRootDir = dimensionPointer.DimensionDirectoryNode.FileSystemInfo.FullName;
          string regionDir = Path.Combine(dimRootDir, FileSystemNames.DirName_Region);
-         return new DirectoryInfo(regionDir).EnumerateFiles(FileSystemNames.RegionFileSpec);
+         var regionDirInfo = new DirectoryInfo(regionDir);
+
+         return regionDirInfo.Exists
+                   ? regionDirInfo.EnumerateFiles(FileSystemNames.RegionFileSpec)
+                   : null;
       }
    }
 }

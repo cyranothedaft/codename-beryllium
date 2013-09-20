@@ -7,7 +7,14 @@ using System.Threading.Tasks;
 namespace beryllium.lib.Model {
    public class DimensionMetadata {
       public DimensionPointer DimensionPointer { get; private set; }
+
+      /// <summary>
+      /// May be null if dimension contains no region directory
+      /// </summary>
       public RegionPointer[] RegionPointers { get; internal set; }
+
+      public bool HasRegions { get { return ( RegionPointers != null ); } }
+
 
       public DimensionMetadata(DimensionPointer dimensionPointer) {
          DimensionPointer = dimensionPointer;

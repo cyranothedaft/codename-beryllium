@@ -34,5 +34,17 @@ namespace test.beryllium.xmldump.Properties {
                 this["TestDataPath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\files\\personal\\proj\\dev\\codename-beryllium\\data")]
+        public string TestDataPath_xeat {
+            get {
+                return ((string)(this["TestDataPath_xeat"]));
+            }
+            set {
+                this["TestDataPath_xeat"] = value;
+            }
+        }
     }
 }

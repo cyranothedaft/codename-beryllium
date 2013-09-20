@@ -34,21 +34,24 @@ namespace beryllium.lib {
             DimensionMetadata dimension = DimensionScanner.ReadMetadata(dimensionPointer);
             _masterProc.ProcessDimensionMetadata(dimension);
 
-            foreach ( RegionPointer regionPointer in dimension.RegionPointers ) {
-               RegionReader regionReader = new RegionReader(regionPointer);
-               Region region = regionReader.ReadHeader();
-//               _masterProc.ProcessRegionHeader(region);
-               //===
-//               regionReader.ReadData(regionPointer, region);
-//               foreach ( ChunkPointer chunkPointer in region.ChunkPointers ) {
-//                  Chunk chunk = regionReader.ReadChunkHeaderOnly(chunkPointer);
-//                  _masterProc.ProcessChunkHeader(chunk.Header);
-//
-//                  regionReader.ReadChunkData(chunkPointer, chunk);
-//                  _masterProc.ProcessChunkData(chunk);
-//               }
+            if ( dimension.HasRegions ) {
+               foreach ( RegionPointer regionPointer in dimension.RegionPointers ) {
+                  RegionReader regionReader = new RegionReader(regionPointer);
+                  Region region = regionReader.ReadHeader();
+                  _masterProc.ProcessRegionHeader(region);
 
-               _masterProc.ProcessRegionEnd(region);
+                  //===
+//                  regionReader.ReadData(regionPointer, region);
+//                  foreach ( ChunkPointer chunkPointer in region.ChunkPointers ) {
+//                     Chunk chunk = regionReader.ReadChunkHeaderOnly(chunkPointer);
+//                     _masterProc.ProcessChunkHeader(chunk.Header);
+//
+//                     regionReader.ReadChunkData(chunkPointer, chunk);
+//                     _masterProc.ProcessChunkData(chunk);
+//                  }
+
+                  _masterProc.ProcessRegionEnd(region);
+               }
             }
 
             _masterProc.ProcessDimensionEnd(dimension);

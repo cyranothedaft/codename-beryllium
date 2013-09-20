@@ -18,7 +18,7 @@ namespace test.beryllium.xmldump
    public class XmlDumperTest {
       [Test]
       public void test1() {
-         string levelFilePath = Path.Combine(Settings.Default.TestDataPath, @"SampleWorlds\flat test 1");
+         string levelFilePath = Path.Combine(Settings.Default.TestDataPath_xeat, @"SampleWorlds\flat test 1");
          WorldReader worldReader = new WorldReader();
          XmlDumper xmlDumper = new XmlDumper();
          worldReader.RegisterProcessor(xmlDumper);

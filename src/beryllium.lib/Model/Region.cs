@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 
 namespace beryllium.lib.Model {
    public class Region {
-      private readonly RegionPointer _regionPointer;
       private readonly List<ChunkPointer> _chunkPointers = new List<ChunkPointer>();
+
+      public RegionPointer RegionPointer { get; private set; }
 
 
       public Region(RegionPointer regionPointer) {
-         _regionPointer = regionPointer;
+         RegionPointer = regionPointer;
       }
 
 
-      public void AddChunkPointer(ChunkPointer chunkPtr) {
+      internal void AddChunkPointer(ChunkPointer chunkPtr) {
          _chunkPointers.Add(chunkPtr);
       }
 
