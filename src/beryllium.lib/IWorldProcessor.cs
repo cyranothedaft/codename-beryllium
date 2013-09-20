@@ -17,9 +17,11 @@ namespace beryllium.lib {
 
       void ProcessRegionHeader(Region region);
 
-      void ProcessChunkHeader(ChunkHeader chunkHeader);
+      //void ProcessChunkHeader(ChunkHeader chunkHeader);
 
-      void ProcessChunkData(Chunk chunk);
+      //void ProcessChunkData(Chunk chunk);
+
+      void ProcessChunk(Chunk chunk);
 
       void ProcessRegionEnd(Region region);
 

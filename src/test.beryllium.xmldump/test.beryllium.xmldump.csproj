@@ -50,6 +50,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="StatsProcessorTest.cs" />
     <Compile Include="XmlDumperTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -57,6 +58,10 @@
     <ProjectReference Include="..\beryllium.lib\beryllium.lib.csproj">
       <Project>{74c95ba7-4a44-4e4c-8ab7-76055933fdb3}</Project>
       <Name>beryllium.lib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\beryllium.stats\beryllium.stats.csproj">
+      <Project>{c15620fb-0494-4306-a0f3-d827fe34587f}</Project>
+      <Name>beryllium.stats</Name>
     </ProjectReference>
     <ProjectReference Include="..\beryllium.xmldump\beryllium.xmldump.csproj">
       <Project>{483ae91c-7dd5-4566-94ea-370d2984c820}</Project>
@@ -76,6 +81,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\StatsProcessorTest flatTest1 result.csv" />
     <None Include="Resources\XmlDumperTest flatTest1 result.xml">
       <SubType>Designer</SubType>
     </None>

@@ -129,9 +129,9 @@ namespace beryllium.xmldump
 
       public void ProcessDimensionMetadata(DimensionMetadata dimension) {
          _dimElem = new XElement(NodeName_dimension);
-         _dimElem.Add(new XAttribute(AttribName_name, dimension.DimensionPointer.DimensionName));
+         _dimElem.Add(new XAttribute(AttribName_name, dimension.Name));
          // TODO: add enum for supported dimension types
-         if ( dimension.DimensionPointer.DimensionName != "Overworld" )
+         if ( dimension.Name != "Overworld" )
             _dimElem.Add(new XAttribute(AttribName_dirName, dimension.DimensionPointer.DimensionDirectoryNode.Name));
          _dimElem.Add(new XAttribute(AttribName_hasRegions, dimension.HasRegions));
          _dimsElem.Add(_dimElem);
@@ -147,14 +147,18 @@ namespace beryllium.xmldump
       }
 
 
-      public void ProcessChunkHeader(ChunkHeader chunkHeader) {
-         // TODO
+      public void ProcessChunk(Chunk chunk) {
+         //
       }
 
 
-      public void ProcessChunkData(Chunk chunk) {
-         // TODO
-      }
+      //public void ProcessChunkHeader(ChunkHeader chunkHeader) {
+      //   // TODO
+      //}
+
+      //public void ProcessChunkData(Chunk chunk) {
+      //   // TODO
+      //}
 
 
       public void ProcessRegionEnd(Region region) {

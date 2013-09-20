@@ -33,13 +33,19 @@ namespace beryllium.lib {
          foreach ( IWorldProcessor processor in _processors ) processor.ProcessRegionHeader(region);
       }
 
-      public void ProcessChunkHeader(ChunkHeader chunkHeader) {
-         foreach ( IWorldProcessor processor in _processors ) processor.ProcessChunkHeader(chunkHeader);
+      public void ProcessChunk(Chunk chunk) {
+         foreach ( IWorldProcessor processor in _processors ) processor.ProcessChunk(chunk);
       }
 
-      public void ProcessChunkData(Chunk chunk) {
-         foreach ( IWorldProcessor processor in _processors ) processor.ProcessChunkData(chunk);
-      }
+
+      //public void ProcessChunkHeader(ChunkHeader chunkHeader) {
+      //   foreach ( IWorldProcessor processor in _processors ) processor.ProcessChunkHeader(chunkHeader);
+      //}
+
+      //public void ProcessChunkData(Chunk chunk) {
+      //   foreach ( IWorldProcessor processor in _processors ) processor.ProcessChunkData(chunk);
+      //}
+
 
       public void ProcessRegionEnd(Region region) {
          foreach ( IWorldProcessor processor in _processors ) processor.ProcessRegionEnd(region);

@@ -61,8 +61,38 @@ namespace test.beryllium.xmldump.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///   Looks up a localized string similar to ,,,counters,,
+        ///level,dim,region,dims,regions,chunks
+        ///flat test 1,,,3,2,47
+        ///,Overworld,,1,2,47
+        ///,,r-1.-2.mca,0,1,5
+        ///,,r0.0.mca,0,1,42
+        ///,The Nether,,1,0,0
+        ///,The End,,1,0,0
         ///.
+        /// </summary>
+        internal static string StatsProcessorTest_flatTest1_result {
+            get {
+                return ResourceManager.GetString("StatsProcessorTest_flatTest1_result", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;world&gt;
+        ///  &lt;directoryInfo&gt;
+        ///    &lt;fullPath&gt;C:\files\personal\proj\dev\codename-beryllium\data\SampleWorlds\flat test 1&lt;/fullPath&gt;
+        ///    &lt;directory&gt;
+        ///      &lt;directory name=&quot;chickenchunks&quot;&gt;
+        ///        &lt;file name=&quot;loginTimes.dat&quot; /&gt;
+        ///      &lt;/directory&gt;
+        ///      &lt;directory name=&quot;data&quot;&gt;
+        ///        &lt;directory name=&quot;redlogic-compiled-circuit-cache.dat&quot;&gt;
+        ///          &lt;file name=&quot;session-counter&quot; /&gt;
+        ///        &lt;/directory&gt;
+        ///        &lt;file name=&quot;villages.dat&quot; /&gt;
+        ///      &lt;/directory&gt;
+        ///      &lt;directory name=&quot;DIM-1&quot;&gt;
+        ///        &lt;direct [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string XmlDumperTest_flatTest1_result {
             get {

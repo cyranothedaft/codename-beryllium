@@ -9,7 +9,7 @@ using beryllium.lib.Readers;
 
 
 namespace beryllium.lib.Nbt {
-   internal enum TagId : int {
+   public enum TagId : int {
       TAG_End = 0,
       TAG_Byte,
       TAG_Short,

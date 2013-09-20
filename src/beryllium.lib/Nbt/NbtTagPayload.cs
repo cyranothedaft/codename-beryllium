@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 
 namespace beryllium.lib.Nbt {
-   abstract class NbtTagPayload {
+   public abstract class NbtTagPayload {
       public abstract string ToDebugStringShort();
    }
 
 
-   abstract class NbtTagPayload_Composite : NbtTagPayload {
+   public abstract class NbtTagPayload_Composite : NbtTagPayload {
       public abstract IEnumerable<NbtTagInfo> EnumTags();
    }
 
 
-   abstract class NbtTagPayload_Scalar<T> : NbtTagPayload {
+   public abstract class NbtTagPayload_Scalar<T> : NbtTagPayload {
       public abstract T GetValue();
    }
 

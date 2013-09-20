@@ -9,10 +9,11 @@ using beryllium.lib.Nbt;
 
 namespace beryllium.lib.Model {
    public class Chunk {
-      public ChunkHeader Header {
-         get { throw new NotImplementedException(); }
-      }
+      public ChunkPointer ChunkPointer { get; internal set; }
+      public NbtTag Data { get; internal set; }
 
-      internal NbtTag Data { get; set; }
+      public Chunk(ChunkPointer chunkPointer) {
+         ChunkPointer = chunkPointer;
+      }
    }
 }

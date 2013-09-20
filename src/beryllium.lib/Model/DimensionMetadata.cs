@@ -13,6 +13,7 @@ namespace beryllium.lib.Model {
       /// </summary>
       public RegionPointer[] RegionPointers { get; internal set; }
 
+      public string Name { get { return DimensionPointer.DimensionName; } }
       public bool HasRegions { get { return ( RegionPointers != null ); } }
 
 

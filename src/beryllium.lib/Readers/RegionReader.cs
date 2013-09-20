@@ -42,18 +42,21 @@ namespace beryllium.lib.Readers {
       }
 
 
-      public void ReadData(RegionPointer regionPointer, Region readIntoRegion) {
-         throw new NotImplementedException();
+      public void ReadChunks(Region region, Action<Chunk> handleChunk) {
+         using ( FileStream fileStream = new FileStream(_regionPointer.FilePath, FileMode.Open, FileAccess.Read) )
+         using ( BinaryReader binReader = new BinaryReader(fileStream) ) {
+            RegionFileReader rdr = new RegionFileReader(binReader);
+
+            foreach ( var chunkPointer in region.ChunkPointers ) {
+               Chunk chunk = new Chunk(chunkPointer);
+               chunk.Data = rdr.ReadChunkData(chunkPointer);
+               handleChunk(chunk);
+            }
+         }
       }
 
 
-      public Chunk ReadChunkHeaderOnly(ChunkPointer chunkPointer) {
-         throw new NotImplementedException();
-      }
-
-
-      public void ReadChunkData(ChunkPointer chunkPointer, Chunk readIntoChunk) {
-         throw new NotImplementedException();
-      }
+      //public Chunk ReadChunkHeaderOnly(ChunkPointer chunkPointer) {
+      //}
    }
 }

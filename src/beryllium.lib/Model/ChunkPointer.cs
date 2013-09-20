@@ -9,7 +9,7 @@ using beryllium.lib.Readers;
 
 namespace beryllium.lib.Model {
    public class ChunkPointer {
-      private readonly RegionFileReader _regionFileReader;
+      //private readonly RegionFileReader _regionFileReader;
 
       public int ChunkIndex { get; set; }
       public int FileSectorOffset { get; set; }
@@ -18,7 +18,7 @@ namespace beryllium.lib.Model {
 
 
       internal ChunkPointer(int chunkIndex, int fileSectorOffset, int fileSectorExtent, uint timestamp, RegionFileReader regionFileReader) {
-         _regionFileReader = regionFileReader;
+         //_regionFileReader = regionFileReader;
          ChunkIndex = chunkIndex;
          FileSectorOffset = fileSectorOffset;
          FileSectorExtent = fileSectorExtent;

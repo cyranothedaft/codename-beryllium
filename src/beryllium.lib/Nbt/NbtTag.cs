@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace beryllium.lib.Nbt {
    [DebuggerDisplay("Id:{TagId}")]
-   internal class NbtTagInfo {
+   public class NbtTagInfo {
       public TagId TagId { get; private set; }
       public NbtTagPayload Payload { get; private set; }
 
@@ -19,7 +19,7 @@ namespace beryllium.lib.Nbt {
 
 
    [DebuggerDisplay("Id:{TagId} {TagName}")]
-   internal sealed class NbtTag : NbtTagInfo {
+   public sealed class NbtTag : NbtTagInfo {
       public string TagName { get; private set; }
 
       public NbtTag(TagId tagId, string tagName, NbtTagPayload payload)
