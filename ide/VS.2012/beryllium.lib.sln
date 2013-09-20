@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test.beryllium.xmldump", ".
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "(Tests)", "(Tests)", "{5FFF5549-1483-4532-B213-A3239136A99B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "beryllium.mapgen", "..\..\src\beryllium.mapgen\beryllium.mapgen.csproj", "{10F3728B-AF2D-42DB-95B9-889C7DF7F66F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{486398AB-1EB2-4883-A0E4-1D948A6C26AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{486398AB-1EB2-4883-A0E4-1D948A6C26AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{486398AB-1EB2-4883-A0E4-1D948A6C26AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10F3728B-AF2D-42DB-95B9-889C7DF7F66F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10F3728B-AF2D-42DB-95B9-889C7DF7F66F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10F3728B-AF2D-42DB-95B9-889C7DF7F66F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10F3728B-AF2D-42DB-95B9-889C7DF7F66F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
