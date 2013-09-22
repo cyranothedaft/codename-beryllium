@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{74C95BA7-4A44-4E4C-8AB7-76055933FDB3}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{90EC5F00-3ED4-4B26-83AB-29907D69EFA6}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>beryllium.lib</RootNamespace>
-    <AssemblyName>beryllium.lib</AssemblyName>
+    <RootNamespace>beryllium.mapgen.cli</RootNamespace>
+    <AssemblyName>mapgen</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -39,39 +41,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Exceptions\BerylliumException.cs" />
-    <Compile Include="Exceptions\DataStructureException.cs" />
-    <Compile Include="FileSystemNames.cs" />
-    <Compile Include="Model\Chunk.cs" />
-    <Compile Include="Model\ChunkHeader.cs" />
-    <Compile Include="Model\ChunkPointer.cs" />
-    <Compile Include="Model\DimensionMetadata.cs" />
-    <Compile Include="Model\DimensionPointer.cs" />
-    <Compile Include="Model\LevelDirectoryMetadata.cs" />
-    <Compile Include="Model\LevelDirectoryNode.cs" />
-    <Compile Include="Model\LevelMetadata.cs" />
-    <Compile Include="Model\Region.cs" />
-    <Compile Include="Model\RegionHeader.cs" />
-    <Compile Include="Model\RegionPointer.cs" />
-    <Compile Include="Model\WorldCoords.cs" />
-    <Compile Include="Model\WorldWindow.cs" />
-    <Compile Include="Readers\BerylliumBinaryReader.cs" />
-    <Compile Include="Nbt\NbtReader.cs" />
-    <Compile Include="Nbt\NbtTag.cs" />
-    <Compile Include="Nbt\NbtTagPayload.cs" />
-    <Compile Include="Nbt\NbtTagPayload_Compound.cs" />
-    <Compile Include="Nbt\NbtTagPayload_List.cs" />
-    <Compile Include="Readers\LevelDirectoryScanner.cs" />
-    <Compile Include="Readers\RegionFileReader.cs" />
-    <Compile Include="Readers\RegionReader.cs" />
-    <Compile Include="WorldReader.cs" />
-    <Compile Include="IWorldProcessor.cs" />
-    <Compile Include="MasterProcessor.cs" />
+    <Compile Include="ConsoleTraceProcessor.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Readers\DimensionScanner.cs" />
-    <Compile Include="Readers\LevelDatReader.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\beryllium.lib\beryllium.lib.csproj">
+      <Project>{74c95ba7-4a44-4e4c-8ab7-76055933fdb3}</Project>
+      <Name>beryllium.lib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\beryllium.mapgen\beryllium.mapgen.csproj">
+      <Project>{10f3728b-af2d-42db-95b9-889c7df7f66f}</Project>
+      <Name>beryllium.mapgen</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

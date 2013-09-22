@@ -43,7 +43,7 @@ namespace beryllium.stats {
 
 
       public void ProcessChunk(Chunk chunk) {
-         if ( chunk.Data != null ) {
+         if ( chunk.HasData ) {
             _currentChunk = _currentRegion.AddChild(NodeType.Chunk, chunk.ChunkPointer.ChunkIndex.ToString("0000"));
             _currentChunk.Counters.Chunks = 1;
             _currentRegion.Counters.Chunks++;

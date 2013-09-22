@@ -13,6 +13,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "(Tests)", "(Tests)", "{5FFF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "beryllium.mapgen", "..\..\src\beryllium.mapgen\beryllium.mapgen.csproj", "{10F3728B-AF2D-42DB-95B9-889C7DF7F66F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{1A2F293B-DBF9-40B5-97A0-1BBAAB87FFE0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Applications", "{5E5EF0AC-C41C-438F-9529-00B801CE065C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "beryllium.mapgen.cli", "..\..\src\beryllium.mapgen.cli\beryllium.mapgen.cli.csproj", "{90EC5F00-3ED4-4B26-83AB-29907D69EFA6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,11 +45,19 @@ Global
 		{10F3728B-AF2D-42DB-95B9-889C7DF7F66F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10F3728B-AF2D-42DB-95B9-889C7DF7F66F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10F3728B-AF2D-42DB-95B9-889C7DF7F66F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90EC5F00-3ED4-4B26-83AB-29907D69EFA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90EC5F00-3ED4-4B26-83AB-29907D69EFA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90EC5F00-3ED4-4B26-83AB-29907D69EFA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90EC5F00-3ED4-4B26-83AB-29907D69EFA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{486398AB-1EB2-4883-A0E4-1D948A6C26AB} = {5FFF5549-1483-4532-B213-A3239136A99B}
+		{10F3728B-AF2D-42DB-95B9-889C7DF7F66F} = {1A2F293B-DBF9-40B5-97A0-1BBAAB87FFE0}
+		{C15620FB-0494-4306-A0F3-D827FE34587F} = {1A2F293B-DBF9-40B5-97A0-1BBAAB87FFE0}
+		{483AE91C-7DD5-4566-94EA-370D2984C820} = {1A2F293B-DBF9-40B5-97A0-1BBAAB87FFE0}
+		{90EC5F00-3ED4-4B26-83AB-29907D69EFA6} = {5E5EF0AC-C41C-438F-9529-00B801CE065C}
 	EndGlobalSection
 EndGlobal

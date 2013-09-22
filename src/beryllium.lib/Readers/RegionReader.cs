@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using beryllium.lib.Model;
+using beryllium.lib.Nbt;
 
 
 
@@ -49,7 +50,9 @@ namespace beryllium.lib.Readers {
 
             foreach ( var chunkPointer in region.ChunkPointers ) {
                Chunk chunk = new Chunk(chunkPointer);
-               chunk.Data = rdr.ReadChunkData(chunkPointer);
+               NbtTag rootTag = rdr.ReadChunkData(chunkPointer);
+               if ( rootTag != null )
+                  chunk.SetData(rootTag);
                handleChunk(chunk);
             }
          }

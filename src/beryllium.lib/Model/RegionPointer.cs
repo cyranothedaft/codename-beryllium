@@ -15,12 +15,14 @@ namespace beryllium.lib.Model {
    public class RegionPointer {
       private readonly FileInfo _regionFileInfo;
 
-      public int RegionX, RegionZ;
-      public int ChunkX0, ChunkZ0;
-      public int ChunkX1, ChunkZ1;
+      //public int RegionX, RegionZ;
+      //public int ChunkX0, ChunkZ0;
+      //public int ChunkX1, ChunkZ1;
 
       public string FileName { get { return _regionFileInfo.Name; } }
       public string FilePath { get { return _regionFileInfo.FullName; } }
+
+      public WorldCoords_Region WorldCoords_Region { get; private set; }
 
 
       public RegionPointer(FileInfo regionFileInfo) {
@@ -30,14 +32,17 @@ namespace beryllium.lib.Model {
          Match m = regionNameRe.Match(_regionFileInfo.Name);
          if ( !m.Success ) throw new InvalidLevelStructureException(string.Format("Invalid region filename format: \"{0}\"", _regionFileInfo.FullName));
 
-         RegionX = int.Parse(m.Groups["X"].Value);
-         RegionZ = int.Parse(m.Groups["Z"].Value);
-         ChunkX0 = RegionX << 5;
-         ChunkZ0 = RegionZ << 5;
+         WorldCoords_Region = new WorldCoords_Region()
+                                 {
+                                    X = int.Parse(m.Groups["X"].Value),
+                                    Z = int.Parse(m.Groups["Z"].Value),
+                                 };
+         //ChunkX0 = RegionX << 5;
+         //ChunkZ0 = RegionZ << 5;
          //int extentX = ( regionX < 0 ) ? -1 : 1,
          //    extentZ = ( regionZ < 0 ) ? -1 : 1;
-         ChunkX1 = ( RegionX + 1 ) << 5;
-         ChunkZ1 = ( RegionZ + 1 ) << 5;
+         //ChunkX1 = ( RegionX + 1 ) << 5;
+         //ChunkZ1 = ( RegionZ + 1 ) << 5;
          //int chunkX1 = ( regionX + extentX ) << 5,
          //    chunkZ1 = ( regionZ + extentZ ) << 5;
       }
