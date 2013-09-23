@@ -43,7 +43,6 @@
     <Compile Include="Exceptions\DataStructureException.cs" />
     <Compile Include="FileSystemNames.cs" />
     <Compile Include="Model\Chunk.cs" />
-    <Compile Include="Model\ChunkHeader.cs" />
     <Compile Include="Model\ChunkPointer.cs" />
     <Compile Include="Model\DimensionMetadata.cs" />
     <Compile Include="Model\DimensionPointer.cs" />
@@ -51,7 +50,6 @@
     <Compile Include="Model\LevelDirectoryNode.cs" />
     <Compile Include="Model\LevelMetadata.cs" />
     <Compile Include="Model\Region.cs" />
-    <Compile Include="Model\RegionHeader.cs" />
     <Compile Include="Model\RegionPointer.cs" />
     <Compile Include="Model\WorldCoords.cs" />
     <Compile Include="Model\WorldWindow.cs" />

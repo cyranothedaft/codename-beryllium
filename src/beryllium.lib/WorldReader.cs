@@ -40,16 +40,6 @@ namespace beryllium.lib {
                   Region region = regionReader.ReadHeader();
                   _masterProc.ProcessRegionHeader(region);
 
-//                  regionReader.ReadData(regionPointer, region);
-//                  foreach ( ChunkPointer chunkPointer in region.ChunkPointers ) {
-//                     Chunk chunk = regionReader.ReadChunkHeaderOnly(chunkPointer);
-//                     _masterProc.ProcessChunkHeader(chunk.Header);
-
-//                     Chunk chunk = regionReader.ReadChunk(chunkPointer);
-//                     _masterProc.ProcessChunkData(chunk);
-//                  }
-
-                  //Action<Chunk> chunkHandler = chunk => { _masterProc.ProcessChunkData(chunk); };
                   regionReader.ReadChunks(region, _masterProc.ProcessChunk);
 
                   _masterProc.ProcessRegionEnd(region);

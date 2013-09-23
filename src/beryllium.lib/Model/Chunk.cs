@@ -16,8 +16,13 @@ namespace beryllium.lib.Model {
 
       internal NbtTag Data { get { return _data; } }
 
-      public int ChunkPosX { get; private set; }
-      public int ChunkPosZ { get; private set; }
+      /// <summary>
+      /// Absolute block coords of chunk
+      /// </summary>
+      public WorldCoords ChunkCoords { get; private set; }
+
+      //public int ChunkPosX { get; private set; }
+      //public int ChunkPosZ { get; private set; }
       public int[] HeightValues { get; private set; }
 
 
@@ -27,10 +32,6 @@ namespace beryllium.lib.Model {
 
 
       public bool HasData { get { return ( _data != null ); } }
-
-      public WorldCoords_Chunk WorldCoords_Chunk {
-         get { return new WorldCoords_Chunk(ChunkPosX, ChunkPosZ); }
-      }
 
 
       internal void SetData(NbtTag rootTag) {
@@ -42,8 +43,10 @@ namespace beryllium.lib.Model {
 
          NbtTag xPosTag = findNbtTag(rootTag, "Level", "xPos");
          NbtTag zPosTag = findNbtTag(rootTag, "Level", "zPos");
-         ChunkPosX = ( ( NbtTagPayload_Scalar<int> )xPosTag.Payload ).GetValue();
-         ChunkPosZ = ( ( NbtTagPayload_Scalar<int> )zPosTag.Payload ).GetValue();
+
+         ChunkCoords = new WorldCoords(WorldCoordUnit.Block,
+                                       ( ( NbtTagPayload_Scalar<int> )xPosTag.Payload ).GetValue(),
+                                       ( ( NbtTagPayload_Scalar<int> )zPosTag.Payload ).GetValue());
 
          _data = rootTag;
       }

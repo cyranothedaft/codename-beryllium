@@ -22,7 +22,10 @@ namespace beryllium.lib.Model {
       public string FileName { get { return _regionFileInfo.Name; } }
       public string FilePath { get { return _regionFileInfo.FullName; } }
 
-      public WorldCoords_Region WorldCoords_Region { get; private set; }
+      /// <summary>
+      /// Absolute region coords of region
+      /// </summary>
+      public WorldCoords RegionCoords { get; private set; }
 
 
       public RegionPointer(FileInfo regionFileInfo) {
@@ -32,11 +35,9 @@ namespace beryllium.lib.Model {
          Match m = regionNameRe.Match(_regionFileInfo.Name);
          if ( !m.Success ) throw new InvalidLevelStructureException(string.Format("Invalid region filename format: \"{0}\"", _regionFileInfo.FullName));
 
-         WorldCoords_Region = new WorldCoords_Region()
-                                 {
-                                    X = int.Parse(m.Groups["X"].Value),
-                                    Z = int.Parse(m.Groups["Z"].Value),
-                                 };
+         RegionCoords = new WorldCoords(WorldCoordUnit.Region,
+                                        int.Parse(m.Groups["X"].Value),
+                                        int.Parse(m.Groups["Z"].Value));
          //ChunkX0 = RegionX << 5;
          //ChunkZ0 = RegionZ << 5;
          //int extentX = ( regionX < 0 ) ? -1 : 1,

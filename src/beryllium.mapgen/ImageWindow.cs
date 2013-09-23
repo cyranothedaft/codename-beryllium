@@ -4,7 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace beryllium.lib.Model {
-   public class ChunkHeader {
+namespace beryllium.mapgen {
+   internal class ImageWindow {
+   }
+
+   internal sealed class RelativeImageWindow {
+      
    }
 }

@@ -18,14 +18,14 @@ namespace beryllium.mapgen {
       private readonly string _filenamePrefix;
 
       //private int _width, _height;
-      private int _minRegionX,
-                  _minRegionZ,
-                  _maxRegionX,
-                  _maxRegionZ;
+      //private int _minRegionX,
+      //            _minRegionZ,
+      //            _maxRegionX,
+      //            _maxRegionZ;
       private ImageWindow _imageExtent;
 
-      private WorldWindow_Region _worldExtents_region;
-      private WorldWindow_Block _worldExtents_block;
+      private WorldWindow _regionExtents;
+
       //private WorldCoords _minWorldCoords,
       //                    _maxWorldCoords;
 
@@ -56,15 +56,15 @@ namespace beryllium.mapgen {
          _bmpHeight = null;
          if ( !dimension.HasRegions ) return;
 
-         var regionCoords = dimension.RegionPointers.Select(r => r.WorldCoords_Region);
+         var regionCoords = dimension.RegionPointers.Select(r => r.RegionCoords);
          // scan map data to determine overall extent
          // (used to determine map image dimensions and map-to-image block translation)
-         _worldExtents_region = WorldWindow_Region.ExtentFromCoordList(regionCoords);
+         _regionExtents = WorldWindow.ExtentFromCoordList(regionCoords);
 
          //_minWorldCoords = WorldCoords.FromRegion(_minRegionX, _minRegionZ);
          //_maxWorldCoords = WorldCoords.FromRegion(_maxRegionX + 1, _maxRegionZ + 1);
 
-         _worldExtents_block = new WorldWindow_Block(_worldExtents_region);
+         WorldWindow blockExtents = _regionExtents.ConvertTo(WorldCoordUnit.Block);
 
          _translation_block = new WorldToImageTranslation<WorldCoords_Block>(
             w => new ImageCoords()
@@ -115,8 +115,8 @@ namespace beryllium.mapgen {
       private unsafe void setHeightMapPixels(Chunk chunk, BitmapData bmpHeightData) {
          byte* scan0 = ( byte* )bmpHeightData.Scan0;
 
-         WorldCoords_Block chunkCoords_Block = new WorldCoords_Block(chunk.WorldCoords_Chunk);
-         ImageCoords chunkImageCoords = _translation_block.Translate(chunkCoords_Block);
+         WorldCoords chunkCoords = chunk.ChunkCoords.ConvertTo(WorldCoordUnit.Block);
+         ImageCoords chunkImageCoords = _translation_block.Translate(chunkCoords);
 
          // iterate through all 16*16 blocks in the chunk's height map
          for ( int x = 0; x < 16; ++x )
@@ -127,7 +127,7 @@ namespace beryllium.mapgen {
             // skip if height is unset
             if ( height == -1 ) continue;
 
-            WorldCoords_Block blockCoords = chunkCoords_Block.Offset(x, z);
+            WorldCoords blockCoords = chunkCoords.Offset(x, z);
             ImageCoords blockImageCoords = _translation_block.Translate(blockCoords);
 
             byte scaledHeightValue = ( byte )height;

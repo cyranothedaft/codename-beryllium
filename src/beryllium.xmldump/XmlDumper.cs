@@ -141,8 +141,8 @@ namespace beryllium.xmldump
       public void ProcessRegionHeader(Region region) {
          XElement regionElem = new XElement(NodeName_region);
          regionElem.Add(new XAttribute(AttribName_name, region.RegionPointer.FileName));
-         regionElem.Add(new XAttribute(AttribName_x, region.RegionPointer.WorldCoords_Region.X));
-         regionElem.Add(new XAttribute(AttribName_z, region.RegionPointer.WorldCoords_Region.Z));
+         regionElem.Add(new XAttribute(AttribName_x, region.RegionPointer.RegionCoords.X));
+         regionElem.Add(new XAttribute(AttribName_z, region.RegionPointer.RegionCoords.Z));
          _dimElem.Add(regionElem);
       }
 
