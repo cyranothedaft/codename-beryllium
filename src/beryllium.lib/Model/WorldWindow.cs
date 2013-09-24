@@ -1,29 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace beryllium.lib.Model {
+   [DebuggerDisplay("{Location.DebugString} - {Supremum.DebugString}")]
    public class WorldWindow {
       public WorldCoordUnit Units { get; private set; }
-      public WorldCoords FirstCorner { get; private set; }
-      public WorldCoords SecondCorner { get; private set; }
+      public WorldCoords Location { get; private set; }
+      //public WorldCoords SecondCorner { get; private set; }
       public WorldCoords Extent { get; private set; }
+      public WorldCoords Supremum { get; private set; }
 
 
-      public WorldWindow(WorldCoordUnit units, int x, int z, int extentX, int extentZ) {
+      private WorldWindow(WorldCoordUnit units, WorldCoords location, WorldCoords extent) {
          Units = units;
-         FirstCorner = new WorldCoords(units, x, z);
-         SecondCorner = new WorldCoords(units, extentX, extentZ);
+         Location = location;
+         Extent = extent;
+         Supremum = Location.Offset(Extent);
       }
 
-      private WorldWindow(WorldCoordUnit units, WorldCoords firstCorner, WorldCoords secondCorner) {
-         Units = units;
-         FirstCorner = firstCorner;
-         SecondCorner = secondCorner;
+
+      public WorldWindow(WorldCoordUnit units, int x, int z, int extentX, int extentZ)
+         : this(units, new WorldCoords(units, x, z), new WorldCoords(units, extentX, extentZ)) {
       }
 
+
+      public WorldWindow(WorldCoords location, int extentX, int extentZ)
+         : this(location.Units, location, new WorldCoords(location.Units, extentX, extentZ)) {
+      }
+
+
+      //public static WorldCoords ExtentTo(WorldCoords firstCorner, WorldCoords secondCorner) {
+      //   return new WorldCoords(firstCorner.Units,
+      //                          secondCorner.X - firstCorner.X + 1,
+      //                          secondCorner.Z - firstCorner.Z + 1);
+      //}
 
 
       public static WorldWindow ExtentFromCoordList(IEnumerable<WorldCoords> coords) {
@@ -41,32 +55,32 @@ namespace beryllium.lib.Model {
             if ( coord.Z > maxZ ) maxZ = coord.Z;
          }
 
-         return new WorldWindow(units, minX, minZ, maxX, maxZ);
+         return new WorldWindow(units, minX, minZ, maxX - minX + 1, maxZ - minZ + 1);
       }
 
 
       public WorldWindow ConvertTo(WorldCoordUnit newUnits) {
-         WorldWindow newWindow = new WorldWindow(
-            this.Units,
-            this.FirstCorner.ConvertTo(newUnits),
-            this.SecondCorner.ConvertTo(newUnits));
+         WorldWindow newWindow = new WorldWindow(newUnits,
+                                                 this.Location.ConvertTo(newUnits),
+                                                 this.Extent.ConvertTo(newUnits));
          return newWindow;
       }
    }
 
 
-   public sealed class RelativeWorldWindow : WorldWindow {
-      private RelativeWorldCoords _location;
-
-      public WorldWindow RelativeTo { get; private set; }
-      public override WorldCoords Location { get { return _location; } }
-
-      public RelativeWorldWindow(WorldWindow relativeTo, WorldCoords location, int extentX, int extentZ)
-         : base(relativeTo.Units, extentX, extentZ) {
-         RelativeTo = relativeTo;
-         Location = new RelativeWorldCoords(location;
-      }
-   }
+   //===
+//   public sealed class RelativeWorldWindow : WorldWindow {
+//      private RelativeWorldCoords _location;
+//
+//      public WorldWindow RelativeTo { get; private set; }
+//      public override WorldCoords Location { get { return _location; } }
+//
+//      public RelativeWorldWindow(WorldWindow relativeTo, WorldCoords location, int extentX, int extentZ)
+//         : base(relativeTo.Units, extentX, extentZ) {
+//         RelativeTo = relativeTo;
+//         Location = new RelativeWorldCoords(location;
+//      }
+//   }
 
 
    //public abstract class WorldWindow<T> where T:WorldCoords, new() {

@@ -15,9 +15,9 @@ namespace beryllium.mapgen.cli {
          string outputDir = args[1];
 
          WorldReader worldReader = new WorldReader();
-         MapGenerator mapGen = new MapGenerator(outputDir, "test - ");
+         HeightMapGenerator heightMapGen = new HeightMapGenerator(outputDir, "test - ");
          worldReader.RegisterProcessor(new ConsoleTraceProcessor());
-         worldReader.RegisterProcessor(mapGen);
+         worldReader.RegisterProcessor(heightMapGen);
          worldReader.Process(levelFilePath);
       }
    }

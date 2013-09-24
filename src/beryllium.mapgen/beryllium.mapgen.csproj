@@ -44,7 +44,7 @@
   <ItemGroup>
     <Compile Include="ImageCoords.cs" />
     <Compile Include="ImageWindow.cs" />
-    <Compile Include="MapGenerator.cs" />
+    <Compile Include="HeightMapGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WorldToImageTranslation.cs" />
   </ItemGroup>

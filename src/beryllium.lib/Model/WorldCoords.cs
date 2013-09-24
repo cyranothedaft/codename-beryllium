@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,10 +13,12 @@ namespace beryllium.lib.Model {
    }
 
 
+   [DebuggerDisplay("{DebugString}")]
    public class WorldCoords {
       internal const double RegionToBlockFactor = 32 * 16;
       internal const double ChunkToBlockFactor = 16;
 
+      public WorldCoords RelativeTo { get; private set; } // === defaults to (0,0) (absolute)
       public WorldCoordUnit Units { get; private set; }
       public int X { get; private set; }
       public int Z { get; private set; }
@@ -32,6 +35,7 @@ namespace beryllium.lib.Model {
       //}
 
 
+
       public WorldCoords ConvertTo(WorldCoordUnit toUnits) {
          double factor = getConversionFactor(this.Units, toUnits);
          return new WorldCoords(toUnits, ( int )( this.X * factor ), ( int )( this.Z * factor ));
@@ -45,20 +49,33 @@ namespace beryllium.lib.Model {
                   case WorldCoordUnit.Chunk:   return ChunkToBlockFactor;
                   case WorldCoordUnit.Region:  return RegionToBlockFactor;
                }
+               break;
          }
          throw new InvalidOperationException(string.Format("WorldCoord conversion not supported from {0} to {1}", fromUnits, toUnits));
       }
-   }
 
 
-   public sealed class RelativeWorldCoords : WorldCoords {
-      public WorldCoords RelativeTo { get; private set; }
-
-      public RelativeWorldCoords(WorldCoords relativeTo, int offsetX, int offsetZ)
-         : base(relativeTo.Units, offsetX, offsetZ) {
-         RelativeTo = relativeTo;
+      public WorldCoords Offset(int offsetX, int offsetZ) {
+         return new RelativeWorldCoords(this, offsetX, offsetZ);
       }
+
+      public WorldCoords Offset(WorldCoords offset) {
+         return new RelativeWorldCoords(this, offset.X, offset.Z);
+      }
+
+
+      public string DebugString { get { return string.Format("({0}: {1},{2})", Units, X, Z); } }
    }
+
+
+   //public sealed class RelativeWorldCoords : WorldCoords {
+   //   public WorldCoords RelativeTo { get; private set; }
+
+   //   public RelativeWorldCoords(WorldCoords relativeTo, int offsetX, int offsetZ)
+   //      : base(relativeTo.Units, offsetX, offsetZ) {
+   //      RelativeTo = relativeTo;
+   //   }
+   //}
 
 
 

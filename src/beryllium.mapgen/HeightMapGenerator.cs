@@ -13,7 +13,7 @@ using Region = beryllium.lib.Model.Region;
 
 
 namespace beryllium.mapgen {
-   public sealed class MapGenerator : IWorldProcessor {
+   public sealed class HeightMapGenerator : IWorldProcessor {
       private readonly string _outputDir;
       private readonly string _filenamePrefix;
 
@@ -29,13 +29,13 @@ namespace beryllium.mapgen {
       //private WorldCoords _minWorldCoords,
       //                    _maxWorldCoords;
 
-      private WorldToImageTranslation<WorldCoords_Block> _translation_block;
+      private WorldToImageTranslation _translation;
 
       private Bitmap _bmpHeight;
       private BitmapData _bmpHeightRegionData;
 
 
-      public MapGenerator(string outputDir, string filenamePrefix = "") {
+      public HeightMapGenerator(string outputDir, string filenamePrefix = "") {
          _outputDir = outputDir;
          _filenamePrefix = filenamePrefix;
       }
@@ -66,14 +66,12 @@ namespace beryllium.mapgen {
 
          WorldWindow blockExtents = _regionExtents.ConvertTo(WorldCoordUnit.Block);
 
-         _translation_block = new WorldToImageTranslation<WorldCoords_Block>(
-            w => new ImageCoords()
-                    {
-                       X = _worldExtents_block.Max.Z - w.Z,
-                       Y = _worldExtents_block.Max.X - w.X
-                    });
+         _translation = new WorldToImageTranslation(
+            w => new ImageCoords(
+                    blockExtents.Supremum.Z - w.Z,
+                    blockExtents.Supremum.X - w.X));
             
-         _imageExtent = _translation_block.Translate(_worldExtents_block);
+         _imageExtent = _translation.Translate(blockExtents);
 
          //_width = _maxWorldCoords.X - _minWorldCoords.X + 1;
          //_height = _maxWorldCoords.Z - _minWorldCoords.Z + 1;
@@ -95,14 +93,13 @@ namespace beryllium.mapgen {
       public void ProcessRegionHeader(Region region) {
          // determine image rectangle corresponding to this region
 
-         WorldWindow_Block regionWindow_block =
-            new WorldWindow_Block(
-               new WorldWindow_Region(region.RegionPointer.WorldCoords_Region, 1, 1));
+         WorldWindow regionWindow = new WorldWindow(region.RegionPointer.RegionCoords, 1, 1)
+            .ConvertTo(WorldCoordUnit.Block);
 
-         ImageWindow regionWindow = _translation_block.Translate(regionWindow_block);
+         ImageWindow regionImg = _translation.Translate(regionWindow);
 
          // lock region in bitmap for direct-memory pixel access
-         _bmpHeightRegionData = _bmpHeight.LockBits(regionWindow.ToRectangle(), ImageLockMode.WriteOnly, _bmpHeight.PixelFormat);
+         _bmpHeightRegionData = _bmpHeight.LockBits(regionImg.ToRectangle(), ImageLockMode.WriteOnly, _bmpHeight.PixelFormat);
       }
 
 
@@ -116,7 +113,7 @@ namespace beryllium.mapgen {
          byte* scan0 = ( byte* )bmpHeightData.Scan0;
 
          WorldCoords chunkCoords = chunk.ChunkCoords.ConvertTo(WorldCoordUnit.Block);
-         ImageCoords chunkImageCoords = _translation_block.Translate(chunkCoords);
+         ImageCoords chunkImageCoords = _translation.Translate(chunkCoords);
 
          // iterate through all 16*16 blocks in the chunk's height map
          for ( int x = 0; x < 16; ++x )
@@ -128,7 +125,7 @@ namespace beryllium.mapgen {
             if ( height == -1 ) continue;
 
             WorldCoords blockCoords = chunkCoords.Offset(x, z);
-            ImageCoords blockImageCoords = _translation_block.Translate(blockCoords);
+            ImageCoords blockImageCoords = _translation.Translate(blockCoords);
 
             byte scaledHeightValue = ( byte )height;
 
