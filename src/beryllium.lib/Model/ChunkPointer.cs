@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using beryllium.lib.Readers;
 
 
 namespace beryllium.lib.Model {
+   [DebuggerDisplay("#{ChunkIndex}")]
    public class ChunkPointer {
       public int ChunkIndex { get; set; }
       public int FileSectorOffset { get; set; }
@@ -15,7 +17,7 @@ namespace beryllium.lib.Model {
       public uint Timestamp { get; set; }
 
 
-      internal ChunkPointer(int chunkIndex, int fileSectorOffset, int fileSectorExtent, uint timestamp, RegionFileReader regionFileReader) {
+      internal ChunkPointer(int chunkIndex, int fileSectorOffset, int fileSectorExtent, uint timestamp) {
          ChunkIndex = chunkIndex;
          FileSectorOffset = fileSectorOffset;
          FileSectorExtent = fileSectorExtent;

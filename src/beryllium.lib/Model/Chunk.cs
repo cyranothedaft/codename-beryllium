@@ -44,7 +44,7 @@ namespace beryllium.lib.Model {
          NbtTag xPosTag = findNbtTag(rootTag, "Level", "xPos");
          NbtTag zPosTag = findNbtTag(rootTag, "Level", "zPos");
 
-         ChunkCoords = new WorldCoords(WorldCoordUnit.Block,
+         ChunkCoords = new WorldCoords(WorldCoordUnit.Chunk,
                                        ( ( NbtTagPayload_Scalar<int> )xPosTag.Payload ).GetValue(),
                                        ( ( NbtTagPayload_Scalar<int> )zPosTag.Payload ).GetValue());
 

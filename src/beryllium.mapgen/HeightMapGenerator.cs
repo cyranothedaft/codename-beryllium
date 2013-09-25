@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -16,6 +17,7 @@ namespace beryllium.mapgen {
    public sealed class HeightMapGenerator : IWorldProcessor {
       private readonly string _outputDir;
       private readonly string _filenamePrefix;
+      private readonly List<string> _generatedFiles = new List<string>(); 
 
       //private int _width, _height;
       //private int _minRegionX,
@@ -33,6 +35,9 @@ namespace beryllium.mapgen {
 
       private Bitmap _bmpHeight;
       private BitmapData _bmpHeightRegionData;
+
+
+      public List<string> GeneratedFiles { get { return _generatedFiles; } } 
 
 
       public HeightMapGenerator(string outputDir, string filenamePrefix = "") {
@@ -81,8 +86,8 @@ namespace beryllium.mapgen {
 
       private static Bitmap prepareNewBitmap(ImageWindow imageExtent, PixelFormat pixelFormat) {
          Bitmap bitmap = new Bitmap(imageExtent.Width, imageExtent.Height, pixelFormat);
-         //Graphics.FromImage(bitmap).Clear(Color.Bisque);
-         bitmap.MakeTransparent();
+         Graphics.FromImage(bitmap).Clear(Color.Bisque);
+         //bitmap.MakeTransparent();
          return bitmap;
       }
 
@@ -106,30 +111,41 @@ namespace beryllium.mapgen {
       }
 
 
-      private unsafe void setHeightMapPixels(Chunk chunk, BitmapData bmpHeightData) {// === here next
+      private unsafe void setHeightMapPixels(Chunk chunk, BitmapData bmpHeightData) {
          byte* scan0 = ( byte* )bmpHeightData.Scan0;
 
          WorldCoords chunkCoords = chunk.ChunkCoords.ConvertTo(WorldCoordUnit.Block);
          ImageCoords chunkImageCoords = _translation.Translate(chunkCoords);
-
+Debug.WriteLine("# Chunk #{0:0000}", chunk.ChunkPointer.ChunkIndex);//===
          // iterate through all 16*16 blocks in the chunk's height map
-         for ( int x = 0; x < 16; ++x )
-         for ( int z = 0; z < 16; ++z ) {
+         for ( int z = 0; z < 16; ++z )
+         for ( int x = 0; x < 16; ++x ) {
+         //for ( int x = 0; x < 16; ++x )
+         //for ( int z = 0; z < 16; ++z ) {
+Debug.Write("#   ");
+Debug.Write(string.Format(" ({0,2},{1,2})", x, z));
             int heightMapIndex = ( z * 16 ) + x;
+Debug.Write(string.Format(" {0:000}", heightMapIndex));
             int height = chunk.HeightValues[heightMapIndex];
+Debug.Write(string.Format(" height:{0:000}", height));
 
             // skip if height is unset
             if ( height == -1 ) continue;
 
             WorldCoords blockCoords = chunkCoords.Offset(x, z);
+Debug.Write(string.Format(" block:({0,2},{1,2})", blockCoords.X, blockCoords.Z));
+
             ImageCoords blockImageCoords = _translation.Translate(blockCoords);
+Debug.Write(string.Format(" img:({0,2},{1,2})", blockImageCoords.X, blockImageCoords.Y));
 
             byte scaledHeightValue = ( byte )height;
 
             int rectX = blockImageCoords.X - chunkImageCoords.X,
                 rectY = blockImageCoords.Y - chunkImageCoords.Y;
             int pixelByteIndex = rectY * _bmpHeightRegionData.Stride + rectX * 3;
+Debug.Write(string.Format(" scan+{0}", pixelByteIndex));
             scan0[pixelByteIndex] = scaledHeightValue;
+Debug.WriteLine("");
          }
       }
 
@@ -145,7 +161,11 @@ namespace beryllium.mapgen {
             // write image file for this dimension
             string filename = string.Concat(_filenamePrefix, dimension.Name, ".height.png");
             string filePath = Path.Combine(_outputDir, filename);
+
+            if ( File.Exists(filePath) ) File.Delete(filePath);
             _bmpHeight.Save(filePath, ImageFormat.Png);
+
+            _generatedFiles.Add(filePath);
          }
       }
 
@@ -153,12 +173,5 @@ namespace beryllium.mapgen {
       public void ProcessLevelEnd(LevelMetadata levelMetadata) {
          //
       }
-
-
-      //private void toImageCoords(WorldCoords worldCoords, out int imgX, out int imgZ) {
-      //   // TODO: account for: z-coordinate is mirrored north-to-south
-      //   imgX = worldCoords.X - _minWorldCoords.X;
-      //   imgZ = worldCoords.Z - _minWorldCoords.Z;
-      //}
    }
 }

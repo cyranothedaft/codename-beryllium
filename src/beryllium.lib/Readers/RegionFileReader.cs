@@ -27,7 +27,7 @@ namespace beryllium.lib.Readers {
          _binReader.BaseStream.Seek(4096, SeekOrigin.Current);
          uint timestamp = base.readBigEndian_Int32Unsigned();
 
-         return new ChunkPointer(chunkIndex, fileSectorOffset, fileSectorExtent, timestamp, this);
+         return new ChunkPointer(chunkIndex, fileSectorOffset, fileSectorExtent, timestamp);
       }
 
 

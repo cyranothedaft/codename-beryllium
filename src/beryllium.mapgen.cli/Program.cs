@@ -19,6 +19,10 @@ namespace beryllium.mapgen.cli {
          worldReader.RegisterProcessor(new ConsoleTraceProcessor());
          worldReader.RegisterProcessor(heightMapGen);
          worldReader.Process(levelFilePath);
+
+         Console.WriteLine("Generated {0} files:", heightMapGen.GeneratedFiles.Count);
+         foreach ( string file in heightMapGen.GeneratedFiles )
+            Console.WriteLine(" - {0}", new FileInfo(file).FullName);
       }
    }
 }

@@ -30,6 +30,7 @@ namespace beryllium.mapgen {
 
 
       private ImageCoords translateCoords(WorldCoords worldCoords) {
+         // TODO: account for: z-coordinate is mirrored north-to-south
          return new ImageCoords(
             worldCoords.Z - _worldExtents_block.Location.Z,
             worldCoords.X - _worldExtents_block.Location.X

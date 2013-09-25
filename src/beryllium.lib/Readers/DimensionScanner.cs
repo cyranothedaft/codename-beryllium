@@ -16,7 +16,8 @@ namespace beryllium.lib.Readers {
          var regionFiles = findRegionFiles(dimensionPointer);
          if ( regionFiles != null ) {
             var regionPointers = regionFiles.Select(f => new RegionPointer(f));
-            dimensionMetadata.RegionPointers = regionPointers.ToArray();
+            dimensionMetadata.RegionPointers = new[] { regionPointers.First() };
+            //=== dimensionMetadata.RegionPointers = regionPointers.ToArray();
          }
          return dimensionMetadata;
       }
