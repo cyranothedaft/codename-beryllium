@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace beryllium.lib.Model {
    public enum WorldCoordUnit {
+      None,
       Block,
       Chunk,
       Region,
@@ -18,15 +20,40 @@ namespace beryllium.lib.Model {
       internal const double RegionToBlockFactor = 32 * 16;
       internal const double ChunkToBlockFactor = 16;
 
-      public WorldCoords RelativeTo { get; private set; } // === defaults to (0,0) (absolute)
+      private static readonly WorldCoords _zero = new WorldCoords();
+      public static WorldCoords Zero { get { return _zero; } }
+
       public WorldCoordUnit Units { get; private set; }
+      public int RawX { get; private set; }
+      public int RawZ { get; private set; }
+      public WorldCoords RelativeTo { get; private set; } // defaults to (0,0) (absolute)
       public int X { get; private set; }
       public int Z { get; private set; }
 
-      public WorldCoords(WorldCoordUnit units, int x, int z) {
+
+      // only for instantiating Zero instance
+      private WorldCoords() {
+         Units = WorldCoordUnit.None;
+         X = RawX = 0;
+         Z = RawZ = 0;
+         RelativeTo = WorldCoords.Zero;
+      }
+
+      public WorldCoords(WorldCoordUnit units, int x, int z, WorldCoords relativeTo) {
          Units = units;
-         X = x;
-         Z = z;
+         RawX = x;
+         RawZ = z;
+         RelativeTo = relativeTo ?? WorldCoords.Zero;
+         X = RelativeTo.X + x;
+         Z = RelativeTo.Z + z;
+      }
+
+      public WorldCoords(WorldCoordUnit units, int x, int z)
+         : this(units, x, z, null) {
+      }
+
+      public WorldCoords(WorldCoordUnit units, int x, int z, int relativeToX, int relativeToZ)
+         : this(units, x, z, new WorldCoords(units, relativeToX, relativeToZ)) {
       }
 
       // copy constructor
@@ -56,11 +83,13 @@ namespace beryllium.lib.Model {
 
 
       public WorldCoords Offset(int offsetX, int offsetZ) {
-         return new RelativeWorldCoords(this, offsetX, offsetZ);
+         return new WorldCoords(Units, offsetX, offsetZ, this);
+         //return new RelativeWorldCoords(this, offsetX, offsetZ);
       }
 
       public WorldCoords Offset(WorldCoords offset) {
-         return new RelativeWorldCoords(this, offset.X, offset.Z);
+         return new WorldCoords(Units, offset.X, offset.Z, this);
+         //return new WorldCoords(Units, X + offset.X, Z + offset.Z, offset.X, offset.Z);
       }
 
 

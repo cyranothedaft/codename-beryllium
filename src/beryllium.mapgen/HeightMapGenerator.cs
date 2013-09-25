@@ -66,10 +66,7 @@ namespace beryllium.mapgen {
 
          WorldWindow blockExtents = _regionExtents.ConvertTo(WorldCoordUnit.Block);
 
-         _translation = new WorldToImageTranslation(
-            w => new ImageCoords(
-                    blockExtents.Supremum.Z - w.Z,
-                    blockExtents.Supremum.X - w.X));
+         _translation = new WorldToImageTranslation(blockExtents);
             
          _imageExtent = _translation.Translate(blockExtents);
 
@@ -109,7 +106,7 @@ namespace beryllium.mapgen {
       }
 
 
-      private unsafe void setHeightMapPixels(Chunk chunk, BitmapData bmpHeightData) {
+      private unsafe void setHeightMapPixels(Chunk chunk, BitmapData bmpHeightData) {// === here next
          byte* scan0 = ( byte* )bmpHeightData.Scan0;
 
          WorldCoords chunkCoords = chunk.ChunkCoords.ConvertTo(WorldCoordUnit.Block);

@@ -9,23 +9,38 @@ using beryllium.lib.Model;
 
 namespace beryllium.mapgen {
    internal class WorldToImageTranslation {
-      private readonly Func<WorldCoords, ImageCoords> _translateCoords;
+      private readonly WorldWindow _worldExtents_block;
 
 
-      public WorldToImageTranslation(Func<WorldCoords,ImageCoords> translateCoords) {
-         _translateCoords = translateCoords;
+      public WorldToImageTranslation(WorldWindow worldExtents_block) {
+         _worldExtents_block = worldExtents_block;
       }
 
 
       public ImageCoords Translate(WorldCoords worldCoords) {
-         return _translateCoords(worldCoords);
+         return translateCoords(worldCoords);
       }
 
 
       public ImageWindow Translate(WorldWindow worldWindow) {
-         ImageCoords location = _translateCoords(worldWindow.Location),
-                     extent = _translateCoords(worldWindow.Extent);
+         ImageCoords location = translateCoords(worldWindow.Location),
+                     extent = translateExtents(worldWindow.Extent);
          return new ImageWindow(location, extent.ToSize());
+      }
+
+
+      private ImageCoords translateCoords(WorldCoords worldCoords) {
+         return new ImageCoords(
+            worldCoords.Z - _worldExtents_block.Location.Z,
+            worldCoords.X - _worldExtents_block.Location.X
+            );
+      }
+
+      private ImageCoords translateExtents(WorldCoords worldCoords) {
+         return new ImageCoords(
+            worldCoords.Z,
+            worldCoords.X
+            );
       }
    }
 }

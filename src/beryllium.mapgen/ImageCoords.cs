@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace beryllium.mapgen {
+   [DebuggerDisplay("{DebugString}")]
    internal class ImageCoords {
       public virtual int X { get; private set; }
       public virtual int Y { get; private set; }
@@ -29,20 +31,22 @@ namespace beryllium.mapgen {
       public Size ToSize() {
          return new Size(X, Y);
       }
+
+      public string DebugString { get { return string.Format("({0},{1})", X, Y); } }
    }
 
 
 
-   internal sealed class RelativeImageCoords : ImageCoords {
-      public ImageCoords RelativeTo { get; private set; }
-      public override int X { get { return RelativeTo.X + base.X; } }
-      public override int Y { get { return RelativeTo.Y + base.Y; } }
+   //internal sealed class RelativeImageCoords : ImageCoords {
+   //   public ImageCoords RelativeTo { get; private set; }
+   //   public override int X { get { return RelativeTo.X + base.X; } }
+   //   public override int Y { get { return RelativeTo.Y + base.Y; } }
 
-      public RelativeImageCoords(int x, int y, ImageCoords relativeTo)
-         : base(x, y) {
-         RelativeTo = relativeTo;
-      }
-   }
+   //   public RelativeImageCoords(int x, int y, ImageCoords relativeTo)
+   //      : base(x, y) {
+   //      RelativeTo = relativeTo;
+   //   }
+   //}
 
    //internal class ImageCoords {
    //   public int X, Y;
